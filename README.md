@@ -1,6 +1,6 @@
-# gulp-cordova-author
+# gulp-cordova-access
 
-> Sets the author of the cordova project
+> Sets the access origins of the cordova project
 
 ## Related
 
