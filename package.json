@@ -15,7 +15,8 @@
     "gulpjs",
     "cordova",
     "access",
-    "origin"
+    "origin",
+    "gulp-cordova"
   ],
   "author": {
     "name": "Sam Verschueren",
@@ -27,7 +28,7 @@
   },
   "homepage": "https://github.com/SamVerschueren/gulp-cordova-access",
   "dependencies": {
-    "cordova-config": "0.0.1",
+    "cordova-config": "^0.0.1",
     "gulp-util": "^3.0.4",
     "through2": "^0.6.5"
   }

@@ -14,7 +14,7 @@ var path = require('path'),
     Config = require('cordova-config');
 
 // export the module
-module.exports = function() {
+module.exports = function(origin, options) {
 
     var project;
 
@@ -31,6 +31,7 @@ module.exports = function() {
             var config = new Config(path.join(project.path, 'config.xml'));
 
             // set the access origins
+            config.setAccessOrigin(origin, options);
 
             // Write the config file
             config.write(function() {
