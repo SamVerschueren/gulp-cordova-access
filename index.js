@@ -16,7 +16,14 @@ var path = require('path'),
 // export the module
 module.exports = function(origin, options) {
 
-    var project;
+    var project,
+        origins = origin;
+
+    if(typeof origin !== 'object') {
+        // If origin is not an object, it is the origin value
+        origins = {};
+        origins[origin] = options;
+    }
 
     return through.obj(function(file, enc, cb) {
         project = file;
@@ -30,8 +37,17 @@ module.exports = function(origin, options) {
             // Load the config.xml file
             var config = new Config(path.join(project.path, 'config.xml'));
 
-            // set the access origins
-            config.setAccessOrigin(origin, options);
+            // Iterate over the access origins and add them to the config file
+            for(var key in origins) {
+                if(origins[key] === false) {
+                    // If the value of the origin is false, remove it from the config file
+                    config.removeAccessOrigin(key);
+                }
+                else {
+                    // Set the access origin                  
+                    config.setAccessOrigin(key, origins[key] === true ? {} : origins[key]);
+                }
+            }
 
             // Write the config file
             config.write(function() {
