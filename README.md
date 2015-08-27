@@ -65,7 +65,7 @@ gulp.task('build', function() {
 });
 ```
 
-> Tip: You can add the access origins in a file called `access.json` and call the plugin with `pref(require('./access.json'))`.
+> Tip: You can add the access origins in a file called `access.json` and call the plugin with `access(require('./access.json'))`.
 
 The second way is by providing two parameters, the first one being the name of the preference, the second
 one as the value of the preference.
