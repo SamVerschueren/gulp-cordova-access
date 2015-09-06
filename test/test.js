@@ -28,6 +28,29 @@ describe('gulp-cordova-access', function() {
         fs.copySync(path.join(__dirname, '/fixtures/config.xml'), path.join(this.tmp, 'config.xml'));
     });
 
+    it('Should throw an error if something went wrong', function(cb) {
+        var tmp = tempfile();
+
+        fs.copySync(path.join(__dirname, '/fixtures/config.empty.xml'), path.join(tmp, 'config.xml'));
+
+        // Create the stream
+        var stream = access('*', false);
+
+        stream.on('error', function(err) {
+            cb();
+        });
+
+        // Write the file to the stream
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: tmp,
+            path: tmp,
+            stat: fs.statSync(tmp)
+        }));
+
+        stream.end();
+    });
+
     describe('Key-Value pair', function() {
 
         it('Should remove the access origin if the value is set to false', function(cb) {
