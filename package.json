@@ -1,6 +1,6 @@
 {
   "name": "gulp-cordova-access",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Sets the access origins of the cordova project",
   "main": "index.js",
   "scripts": {
