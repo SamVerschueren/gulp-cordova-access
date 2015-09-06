@@ -65,10 +65,10 @@ gulp.task('build', function() {
 });
 ```
 
-> Tip: You can add the access origins in a file called `access.json` and call the plugin with `pref(require('./access.json'))`.
+> Tip: You can add the access origins in a file called `access.json` and call the plugin with `access(require('./access.json'))`.
 
-The second way is by providing two parameters, the first one being the name of the preference, the second
-one as the value of the preference.
+The second way is by providing two parameters, the first one being the name of the access origin, the second
+one as the value of the access origin.
 
 Notice that the object method is faster then the key-value pair method. The reason for this is that everytime the plugin is called,
 the `config.xml` file is parsed all over again. Because you only call the plugin once with the object method, the config file
