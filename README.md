@@ -1,6 +1,7 @@
 # gulp-cordova-access
 
 [![Build Status](https://travis-ci.org/SamVerschueren/gulp-cordova-access.svg?branch=master)](https://travis-ci.org/SamVerschueren/gulp-cordova-access)
+[![Coverage Status](https://coveralls.io/repos/SamVerschueren/gulp-cordova-access/badge.svg?branch=master&service=github)](https://coveralls.io/github/SamVerschueren/gulp-cordova-access?branch=master)
 
 > Sets the access origins of the cordova project
 
