@@ -28,36 +28,109 @@ describe('gulp-cordova-access', function() {
         fs.copySync(path.join(__dirname, '/fixtures/config.xml'), path.join(this.tmp, 'config.xml'));
     });
 
-    it('Should remove the access origin if the value is set to false', function(cb) {
-        var tmp = this.tmp;
-        var result = [
-            '<?xml version=\'1.0\' encoding=\'utf-8\'?>',
-            '<widget>',
-            '</widget>'
-        ];
+    describe('Key-Value pair', function() {
 
-        // Create the stream
-        var stream = access('*', false);
+        it('Should remove the access origin if the value is set to false', function(cb) {
+            var tmp = this.tmp;
+            var result = [
+                '<?xml version=\'1.0\' encoding=\'utf-8\'?>',
+                '<widget>',
+                '</widget>'
+            ];
 
-        stream.on('data', function() { });
+            // Create the stream
+            var stream = access('*', false);
 
-        stream.on('end', function() {
-            var content = fs.readFileSync(path.join(tmp, 'config.xml'), 'utf8');
+            stream.on('data', function() { });
 
-            // Assert the content
-            content.should.be.equal(result.join(os.EOL) + os.EOL);
+            stream.on('end', function() {
+                var content = fs.readFileSync(path.join(tmp, 'config.xml'), 'utf8');
 
-            cb();
+                // Assert the content
+                content.should.be.equal(result.join(os.EOL) + os.EOL);
+
+                cb();
+            });
+
+            // Write the file to the stream
+            stream.write(new gutil.File({
+                cwd: __dirname,
+                base: tmp,
+                path: tmp,
+                stat: fs.statSync(tmp)
+            }));
+
+            stream.end();
         });
 
-        // Write the file to the stream
-        stream.write(new gutil.File({
-            cwd: __dirname,
-            base: tmp,
-            path: tmp,
-            stat: fs.statSync(tmp)
-        }));
+        it('Should add the access origin', function(cb) {
+            var tmp = this.tmp;
+            var result = [
+                '<?xml version=\'1.0\' encoding=\'utf-8\'?>',
+                '<widget>',
+                '    <access origin="*" />',
+                '    <access origin="http://www.google.com" />',
+                '</widget>'
+            ];
 
-        stream.end();
+            // Create the stream
+            var stream = access('http://www.google.com');
+
+            stream.on('data', function() { });
+
+            stream.on('end', function() {
+                var content = fs.readFileSync(path.join(tmp, 'config.xml'), 'utf8');
+
+                // Assert the content
+                content.should.be.equal(result.join(os.EOL) + os.EOL);
+
+                cb();
+            });
+
+            // Write the file to the stream
+            stream.write(new gutil.File({
+                cwd: __dirname,
+                base: tmp,
+                path: tmp,
+                stat: fs.statSync(tmp)
+            }));
+
+            stream.end();
+        });
+
+        it('Should add the access origin with extra options', function(cb) {
+            var tmp = this.tmp;
+            var result = [
+                '<?xml version=\'1.0\' encoding=\'utf-8\'?>',
+                '<widget>',
+                '    <access origin="*" />',
+                '    <access launch-external="yes" origin="tel:*" />',
+                '</widget>'
+            ];
+
+            // Create the stream
+            var stream = access('tel:*', {'launch-external': 'yes'});
+
+            stream.on('data', function() { });
+
+            stream.on('end', function() {
+                var content = fs.readFileSync(path.join(tmp, 'config.xml'), 'utf8');
+
+                // Assert the content
+                content.should.be.equal(result.join(os.EOL) + os.EOL);
+
+                cb();
+            });
+
+            // Write the file to the stream
+            stream.write(new gutil.File({
+                cwd: __dirname,
+                base: tmp,
+                path: tmp,
+                stat: fs.statSync(tmp)
+            }));
+
+            stream.end();
+        });
     });
 });

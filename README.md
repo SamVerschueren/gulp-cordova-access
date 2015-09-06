@@ -1,5 +1,7 @@
 # gulp-cordova-access
 
+[![Build Status](https://travis-ci.org/SamVerschueren/gulp-cordova-access.svg?branch=master)](https://travis-ci.org/SamVerschueren/gulp-cordova-access)
+
 > Sets the access origins of the cordova project
 
 ## Installation
@@ -80,7 +82,7 @@ will only be parsed once.
 
 #### origins
 
-*Required*  
+*Required*
 Type: `object`
 
 A key-value pair object where the key is the origin and the value indicates if you want to add, remove or add extra properties to the tag.
@@ -89,14 +91,14 @@ A key-value pair object where the key is the origin and the value indicates if y
 
 #### origin
 
-*Required*  
+*Required*
 Type: `string`
 
 The origin of the acess tag.
 
 ##### value
 
-*Required*  
+*Required*
 Type: `boolean|object`
 
 True if you want to add the tag or false if you want to remove the tag. If an object is provided, the properties will be added as extra
