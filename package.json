@@ -4,7 +4,7 @@
   "description": "Sets the access origins of the cordova project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "xo && mocha test",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
@@ -42,6 +42,12 @@
     "fs-extra": "^0.24.0",
     "istanbul": "^0.3.19",
     "mocha": "^2.3.0",
-    "tempfile": "^1.1.1"
+    "tempfile": "^1.1.1",
+    "xo": "*"
+  },
+  "xo": {
+    "ignores": [
+      "test/test.js"
+    ]
   }
 }
