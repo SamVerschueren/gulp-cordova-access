@@ -7,7 +7,7 @@
 
 ## Installation
 
-```bash
+```
 npm install --save-dev gulp-cordova-access
 ```
 ## Usage
@@ -20,13 +20,12 @@ The key-value pair method is used by providing one or two arguments. The first a
 tag you wish to add or remove. The second argument can be either `false`, if you want to remove an access origin, or
 an object to add extra properties to the `access` tag.
 
-```JavaScript
-var gulp = require('gulp'),
-    create = require('gulp-cordova-create'),
-    access = require('gulp-cordova-access');
+```javascript
+const create = require('gulp-cordova-create');
+const access = require('gulp-cordova-access');
 
-gulp.task('build', function() {
-    return gulp.src('dist')
+gulp.task('build', () => {
+    return gulp.src('build')
         .pipe(create())
         .pipe(access('*', false))
         .pipe(access('http://*.google.com'))
@@ -34,7 +33,7 @@ gulp.task('build', function() {
 });
 ```
 
-Because the `allow all` access tag is the default when creating a cordova project, we first remove it. We only want the application
+Because the `allow all` access tag (e.g. `*`) is the default when creating a cordova project, we first remove it. We only want the application
 to be able to communicate with the google APIs.
 
 These tags will be added to the `config.xml` file.
@@ -50,12 +49,11 @@ The key in the object will be used as the access origin, the value is a `boolean
 add or remove the origin, or an `object` with extra parameters. The following example is identical to the
 example above.
 
-```JavaScript
-var gulp = require('gulp'),
-    create = require('gulp-cordova-create'),
-    access = require('gulp-cordova-access');
+```javascript
+const create = require('gulp-cordova-create');
+const access = require('gulp-cordova-access');
 
-gulp.task('build', function() {
+gulp.task('build', () => {
     return gulp.src('dist')
         .pipe(create())
         .pipe(access({
@@ -83,7 +81,7 @@ will only be parsed once.
 
 #### origins
 
-*Required*
+*Required*  
 Type: `object`
 
 A key-value pair object where the key is the origin and the value indicates if you want to add, remove or add extra properties to the tag.
@@ -92,14 +90,14 @@ A key-value pair object where the key is the origin and the value indicates if y
 
 #### origin
 
-*Required*
+*Required*  
 Type: `string`
 
 The origin of the acess tag.
 
 ##### value
 
-*Required*
+*Required*  
 Type: `boolean|object`
 
 True if you want to add the tag or false if you want to remove the tag. If an object is provided, the properties will be added as extra
@@ -108,10 +106,6 @@ properties in the xml tag.
 ## Related
 
 See [`gulp-cordova`](https://github.com/SamVerschueren/gulp-cordova) for the full list of available packages.
-
-## Contributors
-
-- Sam Verschueren [<sam.verschueren@gmail.com>]
 
 ## License
 
